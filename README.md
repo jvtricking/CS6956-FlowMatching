@@ -4,23 +4,25 @@
 
 **Data:** [UCI ILPD dataset 225](https://archive.ics.uci.edu/dataset/225/ilpd) (583 patient records, 416 liver-patient and 167 non-liver-patient). Data downloads automatically during the first notebook run (internet required once). A separate dataset file is not shipped. Citation: Ramana, B. & Venkateswarlu, N. (2022), *ILPD*, UCI Machine Learning Repository, DOI [10.24432/C5D02C](https://doi.org/10.24432/C5D02C). CC BY 4.0.
 
-## Run in VS Code (Windows PowerShell)
+## Run in VS Code (Windows PowerShell / Conda)
 
-1. Open this folder in VS Code and install the **Python** and **Jupyter** extensions.
-2. Create and activate a local environment:
+1. Install Miniconda or Anaconda, and install the **Python** and **Jupyter** extensions in VS Code.
+2. Open this project folder in VS Code, then create the Conda environment in a terminal:
    ```powershell
-   py -3.11 -m venv .venv
-   .\.venv\Scripts\Activate.ps1
-   python -m pip install --upgrade pip
-   pip install -r requirements.txt
+   conda env create -f environments.yml
+   conda activate liver-flow-matching
    ```
-3. Open `liver_flow_matching.ipynb` and select the `.venv` Python kernel in the top right.
-4. Run all cells from top to bottom. Results are saved to `outputs/` (PNG plots and CSV tables).
-5. Edit `.env` to change training settings; restart kernel and rerun. Set `RUN_EPOCH_EXPERIMENT=1` to test additional training durations.
+   If the environment already exists and you change `environments.yml`, update it with:
+   ```powershell
+   conda env update -f environments.yml --prune
+   ```
+3. Open `liver_flow_matching.ipynb`. In the upper-right corner choose **Select Kernel** → **Python Environments** → `liver-flow-matching` (or the matching Conda Python interpreter).
+4. Run all cells from top to bottom. Figures and tables are saved to `outputs/`.
+5. Change the configuration variables near the top of the notebook (`EPOCHS`, `TOY_EPOCHS`, etc.) to adjust experiments. Enable the optional training-duration experiment by setting `RUN_EPOCH_EXPERIMENT = True` in its code cell.
 
-**macOS/Linux:** Create with `python3 -m venv .venv`, activate using `source .venv/bin/activate`, then use the same `pip` commands.
+**File roles:** `environments.yml` creates the Conda environment; experiment settings live directly in the notebook. `requirements.txt` is an optional pip alternative.
 
-**Performance:** CPU compatible; PyTorch CUDA automatically used if installed with CUDA support. Start with `EPOCHS=100` and `TOY_EPOCHS=150` if you want a quicker initial check.
+**Performance:** This default environment uses **CPU-only PyTorch** for straightforward cross-platform setup. To use an NVIDIA GPU, you'll need to replace `cpuonly` and install a compatible CUDA-enabled PyTorch build. For a quick first run, set `EPOCHS = 100` and `TOY_EPOCHS = 150` in the notebook configuration cell.
 
 ## What to discuss in the report
 
