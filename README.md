@@ -22,7 +22,7 @@
 
 **File roles:** `environments.yml` creates the Conda environment; experiment settings live directly in the notebook. `requirements.txt` is an optional pip alternative.
 
-**Performance:** This default environment uses **CPU-only PyTorch** for straightforward cross-platform setup. To use an NVIDIA GPU, you'll need to replace `cpuonly` and install a compatible CUDA-enabled PyTorch build. For a quick first run, set `EPOCHS = 100` and `TOY_EPOCHS = 150` in the notebook configuration cell.
+**Performance:** This environment uses **CPU-only PyTorch 2.5.1** and pip-built numerical packages to avoid mixing Intel MKL/OpenMP with PyTorch's native Windows libraries. If you need CUDA, replace the CPU PyTorch packages and recreate the environment; for a quick first run, set `EPOCHS = 100` and `TOY_EPOCHS = 150` in the notebook configuration cell.
 
 ## What to discuss in the report
 
